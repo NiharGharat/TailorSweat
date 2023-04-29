@@ -8,10 +8,7 @@ To Read
 7. https://towardsdatascience.com/recommendation-system-series-part-1-an-executive-guide-to-building-recommendation-system-608f83e2630a
 
 New
-1. Real-Time Learning from an Expert in Deep Recommendation Systems with Application to mHealth for Physical Exercises
-https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9435440/
-
-
+[Real-Time Learning from an Expert in Deep Recommendation Systems with Application to mHealth for Physical Exercises](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9435440/)
 
 
 To watch
