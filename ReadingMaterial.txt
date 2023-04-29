@@ -7,6 +7,12 @@ To Read
 6. https://www.nerdfitness.com/blog/strength-training-101/
 7. https://towardsdatascience.com/recommendation-system-series-part-1-an-executive-guide-to-building-recommendation-system-608f83e2630a
 
+New
+1. Real-Time Learning from an Expert in Deep Recommendation Systems with Application to mHealth for Physical Exercises
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9435440/
+
+
+
 
 To watch
 1. https://www.youtube.com/watch?v=DFZ1UA7-fxY&t=808s
