@@ -24,6 +24,7 @@
 # To watch
 
 ## Data Related
+[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
 
 
 ## Methodology and Implementation Related
