@@ -26,6 +26,14 @@
 ## Dataset Related
 [Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
 
+[Human Activity Recognition Using Smartphones Data Set](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones)
+[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+
 # To watch
 ## Methodology and Implementation Related
 1. [Recurrent Neural Networks : Data Science Concepts](https://www.youtube.com/watch?v=DFZ1UA7-fxY&t=808s)
