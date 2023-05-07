@@ -24,15 +24,18 @@
 
 
 ## Dataset Related
-[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
-
-[Human Activity Recognition Using Smartphones Data Set](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones)
-[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
-[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
-[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
-[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
-[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
-[Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+1. [Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+2. [Human Activity Recognition Using Smartphones Data Set](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones)
+3. [FitBit Fitness Tracker Data]([https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code](https://www.kaggle.com/datasets/arashnic/fitbit/code))
+4. [Workout/Exercises Video]([https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code](https://www.kaggle.com/datasets/hasyimabdillah/workoutfitness-video))
+5. [2018 calorie, exercise and weight changes](https://www.kaggle.com/datasets/chrisbow/2018-calorie-exercise-and-weight-changes)
+6. [Fitness Trackers Products Ecommerce](https://www.kaggle.com/datasets/devsubhash/fitness-trackers-products-ecommerce)
+7. [Lifesnaps Fitbit dataset]([https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code](https://www.kaggle.com/datasets/skywescar/lifesnaps-fitbit-dataset))
+8. [Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+9. [Food and their calories](https://www.kaggle.com/datasets/vaishnavivenkatesan/food-and-their-calories)
+10. [Fitness Trends Dataset](https://www.kaggle.com/datasets/aroojanwarkhan/fitness-data-trends)
+11. [Yoga Posture Dataset](https://www.kaggle.com/datasets/tr1gg3rtrash/yoga-posture-dataset)
+12. [Apple Watch and Fitbit data](https://www.kaggle.com/datasets/aleespinosa/apple-watch-and-fitbit-data)
 
 # To watch
 ## Methodology and Implementation Related
