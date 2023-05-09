@@ -54,7 +54,7 @@
 27. [🏋️‍♀️🏋️‍♂️Fitness Exercises🏋️‍♀️🏋️‍♂️](https://www.kaggle.com/datasets/edoardoba/fitness-exercises-with-animations)
 - Exercise Names and what body part the exerciese is useful for.
 29. [Fitness Analysis](https://www.kaggle.com/datasets/nithilaa/fitness-analysis)
-- 
+-  Fitness analysis of different people exercises and there outcomes.
 31. [Calories Burned During Exercise and Activities](https://www.kaggle.com/datasets/aadhavvignesh/calories-burned-during-exercise-and-activities)
 32. [Fitness Consumer Survey Data](https://www.kaggle.com/datasets/harshitaaswani/fitness-consumer-survey-data)
 33. [powerlifting-database](https://www.kaggle.com/datasets/dansbecker/powerlifting-database)
