@@ -37,21 +37,31 @@
 11. [Fitness Trackers Products Ecommerce](https://www.kaggle.com/datasets/devsubhash/fitness-trackers-products-ecommerce)
 - Fitness products and their brands, materials etc.
 13. [Lifesnaps Fitbit dataset](https://www.kaggle.com/datasets/skywescar/lifesnaps-fitbit-dataset)
-14. [Yoga Pose Image classification dataset](https://www.kaggle.com/datasets/shrutisaxena/yoga-pose-image-classification-dataset)
-15. [Food and their calories](https://www.kaggle.com/datasets/vaishnavivenkatesan/food-and-their-calories)
-16. [Fitness Trends Dataset](https://www.kaggle.com/datasets/aroojanwarkhan/fitness-data-trends)
-17. [Yoga Posture Dataset](https://www.kaggle.com/datasets/tr1gg3rtrash/yoga-posture-dataset)
-18. [Apple Watch and Fitbit data](https://www.kaggle.com/datasets/aleespinosa/apple-watch-and-fitbit-data)
-19. [Workout/Exercise Images](https://www.kaggle.com/datasets/hasyimabdillah/workoutexercises-images)
-20. [🏋️‍♀️🏋️‍♂️Fitness Exercises🏋️‍♀️🏋️‍♂️](https://www.kaggle.com/datasets/edoardoba/fitness-exercises-with-animations)
-21. [Fitness Analysis](https://www.kaggle.com/datasets/nithilaa/fitness-analysis)
-22. [Calories Burned During Exercise and Activities](https://www.kaggle.com/datasets/aadhavvignesh/calories-burned-during-exercise-and-activities)
-23. [Fitness Consumer Survey Data](https://www.kaggle.com/datasets/harshitaaswani/fitness-consumer-survey-data)
-24. [powerlifting-database](https://www.kaggle.com/datasets/dansbecker/powerlifting-database)
-25. [Crossfit Athletes](https://www.kaggle.com/datasets/ulrikthygepedersen/crossfit-athletes)
-26. [Yoga Vid Collected](https://www.kaggle.com/datasets/pulaksarmah/yoga-videos)
-27. [Powerlifting Database](https://www.kaggle.com/datasets/open-powerlifting/powerlifting-database)
-28. [CardioGoodFitness](https://www.kaggle.com/datasets/saurav9786/cardiogoodfitness)
+- Hourly bpm, temperature, activity etc not aligned with our data requirements.
+15. [Yoga Pose Image classification dataset](https://www.kaggle.com/datasets/shrutisaxena/yoga-pose-image-classification-dataset)
+- Different yoga pose images in their respective folders.
+17. [Food and their calories](https://www.kaggle.com/datasets/vaishnavivenkatesan/food-and-their-calories)
+- Different types of food and their respective calories. Will be useful in future if we are adding a dietery meal information.
+19. [Fitness Trends Dataset](https://www.kaggle.com/datasets/aroojanwarkhan/fitness-data-trends)
+- Step count, calories, sleep hours, blood pressure and weights
+- parameters can be used for profile building.
+21. [Yoga Posture Dataset](https://www.kaggle.com/datasets/tr1gg3rtrash/yoga-posture-dataset)
+- Yoga images postures not useful for our data requirements.
+23. [Apple Watch and Fitbit data](https://www.kaggle.com/datasets/aleespinosa/apple-watch-and-fitbit-data)
+- Age, height, weight, heart_rate and calories.
+25. [Workout/Exercise Images](https://www.kaggle.com/datasets/hasyimabdillah/workoutexercises-images)
+- Workout images can be used for app in future.
+27. [🏋️‍♀️🏋️‍♂️Fitness Exercises🏋️‍♀️🏋️‍♂️](https://www.kaggle.com/datasets/edoardoba/fitness-exercises-with-animations)
+- Exercise Names and what body part the exerciese is useful for.
+29. [Fitness Analysis](https://www.kaggle.com/datasets/nithilaa/fitness-analysis)
+- 
+31. [Calories Burned During Exercise and Activities](https://www.kaggle.com/datasets/aadhavvignesh/calories-burned-during-exercise-and-activities)
+32. [Fitness Consumer Survey Data](https://www.kaggle.com/datasets/harshitaaswani/fitness-consumer-survey-data)
+33. [powerlifting-database](https://www.kaggle.com/datasets/dansbecker/powerlifting-database)
+34. [Crossfit Athletes](https://www.kaggle.com/datasets/ulrikthygepedersen/crossfit-athletes)
+35. [Yoga Vid Collected](https://www.kaggle.com/datasets/pulaksarmah/yoga-videos)
+36. [Powerlifting Database](https://www.kaggle.com/datasets/open-powerlifting/powerlifting-database)
+37. [CardioGoodFitness](https://www.kaggle.com/datasets/saurav9786/cardiogoodfitness)
 
 # To watch
 ## Methodology and Implementation Related
