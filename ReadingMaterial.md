@@ -24,28 +24,34 @@
 
 
 ## Datasets
-1. [Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
+1. [Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code) 
+- Different Exercises title and their description in different columns. It also has what type of exercise it is and what body part it has most impact.
 2. [Human Activity Recognition Using Smartphones Data Set](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones)
-3. [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit/code)
-4. [Workout Exercises Video](https://www.kaggle.com/datasets/hasyimabdillah/workoutfitness-video)
-5. [2018 calorie, exercise and weight changes](https://www.kaggle.com/datasets/chrisbow/2018-calorie-exercise-and-weight-changes)
-6. [Fitness Trackers Products Ecommerce](https://www.kaggle.com/datasets/devsubhash/fitness-trackers-products-ecommerce)
-7. [Lifesnaps Fitbit dataset](https://www.kaggle.com/datasets/skywescar/lifesnaps-fitbit-dataset)
-8. [Yoga Pose Image classification dataset](https://www.kaggle.com/datasets/shrutisaxena/yoga-pose-image-classification-dataset)
-9. [Food and their calories](https://www.kaggle.com/datasets/vaishnavivenkatesan/food-and-their-calories)
-10. [Fitness Trends Dataset](https://www.kaggle.com/datasets/aroojanwarkhan/fitness-data-trends)
-11. [Yoga Posture Dataset](https://www.kaggle.com/datasets/tr1gg3rtrash/yoga-posture-dataset)
-12. [Apple Watch and Fitbit data](https://www.kaggle.com/datasets/aleespinosa/apple-watch-and-fitbit-data)
-13. [Workout/Exercise Images](https://www.kaggle.com/datasets/hasyimabdillah/workoutexercises-images)
-14. [🏋️‍♀️🏋️‍♂️Fitness Exercises🏋️‍♀️🏋️‍♂️](https://www.kaggle.com/datasets/edoardoba/fitness-exercises-with-animations)
-15. [Fitness Analysis](https://www.kaggle.com/datasets/nithilaa/fitness-analysis)
-16. [Calories Burned During Exercise and Activities](https://www.kaggle.com/datasets/aadhavvignesh/calories-burned-during-exercise-and-activities)
-17. [Fitness Consumer Survey Data](https://www.kaggle.com/datasets/harshitaaswani/fitness-consumer-survey-data)
-18. [powerlifting-database](https://www.kaggle.com/datasets/dansbecker/powerlifting-database)
-19. [Crossfit Athletes](https://www.kaggle.com/datasets/ulrikthygepedersen/crossfit-athletes)
-20. [Yoga Vid Collected](https://www.kaggle.com/datasets/pulaksarmah/yoga-videos)
-21. [Powerlifting Database](https://www.kaggle.com/datasets/open-powerlifting/powerlifting-database)
-22. [CardioGoodFitness](https://www.kaggle.com/datasets/saurav9786/cardiogoodfitness)
+- Exercise performed by people that includes six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING)
+5. [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit/code)
+- Data showing daily calories burned by people through different exercises. (18 csv files only some are useful)
+7. [Workout Exercises Video](https://www.kaggle.com/datasets/hasyimabdillah/workoutfitness-video)
+- Video data of people doing all types of exercises with each exercise videos in their name folder. Will be useful in future when we are developing app.
+9. [2018 calorie, exercise and weight changes](https://www.kaggle.com/datasets/chrisbow/2018-calorie-exercise-and-weight-changes)
+- Data showing the food intake weight, ounces and calories intake.
+11. [Fitness Trackers Products Ecommerce](https://www.kaggle.com/datasets/devsubhash/fitness-trackers-products-ecommerce)
+- Fitness products and their brands, materials etc.
+13. [Lifesnaps Fitbit dataset](https://www.kaggle.com/datasets/skywescar/lifesnaps-fitbit-dataset)
+14. [Yoga Pose Image classification dataset](https://www.kaggle.com/datasets/shrutisaxena/yoga-pose-image-classification-dataset)
+15. [Food and their calories](https://www.kaggle.com/datasets/vaishnavivenkatesan/food-and-their-calories)
+16. [Fitness Trends Dataset](https://www.kaggle.com/datasets/aroojanwarkhan/fitness-data-trends)
+17. [Yoga Posture Dataset](https://www.kaggle.com/datasets/tr1gg3rtrash/yoga-posture-dataset)
+18. [Apple Watch and Fitbit data](https://www.kaggle.com/datasets/aleespinosa/apple-watch-and-fitbit-data)
+19. [Workout/Exercise Images](https://www.kaggle.com/datasets/hasyimabdillah/workoutexercises-images)
+20. [🏋️‍♀️🏋️‍♂️Fitness Exercises🏋️‍♀️🏋️‍♂️](https://www.kaggle.com/datasets/edoardoba/fitness-exercises-with-animations)
+21. [Fitness Analysis](https://www.kaggle.com/datasets/nithilaa/fitness-analysis)
+22. [Calories Burned During Exercise and Activities](https://www.kaggle.com/datasets/aadhavvignesh/calories-burned-during-exercise-and-activities)
+23. [Fitness Consumer Survey Data](https://www.kaggle.com/datasets/harshitaaswani/fitness-consumer-survey-data)
+24. [powerlifting-database](https://www.kaggle.com/datasets/dansbecker/powerlifting-database)
+25. [Crossfit Athletes](https://www.kaggle.com/datasets/ulrikthygepedersen/crossfit-athletes)
+26. [Yoga Vid Collected](https://www.kaggle.com/datasets/pulaksarmah/yoga-videos)
+27. [Powerlifting Database](https://www.kaggle.com/datasets/open-powerlifting/powerlifting-database)
+28. [CardioGoodFitness](https://www.kaggle.com/datasets/saurav9786/cardiogoodfitness)
 
 # To watch
 ## Methodology and Implementation Related
