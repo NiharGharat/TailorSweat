@@ -24,4 +24,9 @@ class ServiceLayer:
     Predict next workout
     '''
     def predict_next_workout(self):
+        # Do recomputations on exercise_calc
+        self.recommender_layer.recompute_exercises_weights()
+        # Do recomputations on workout_calc
+        self.recommender_layer.recompute_workout_weights()
+        # Predict/Train from the model
         return self.recommender_layer.recommend_next_workout()
