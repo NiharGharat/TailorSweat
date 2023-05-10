@@ -64,8 +64,8 @@ class FrontEndService:
     def main_procedure(self):
         exit = True
         while exit:
-            next_workouts: List[str] = self._main_procedure()
-            print("Next workout is", next_workouts)
+            next_workouts: str = self._main_procedure()
+            print("Next workout suggestion is ", next_workouts)
             exit = input("Keep doing ops? Y/N").lower().strip() == 'y'
 
         return True

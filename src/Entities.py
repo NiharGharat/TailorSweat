@@ -4,16 +4,16 @@ import datetime
 # The entity which is stored in the csv file
 class Exercise:
 
-    def __init__(self, id: int, name: str, muscle_grp_hit: str, calories_10_min: float, fun_factor: int, is_compound: bool, how_critical: int, exercise_type: str) -> None:
+    def __init__(self, id: int, name: str, muscles_targeted: str, calories_10_min: float, fun_factor: int, is_compound: bool, how_critical: int, exercise_type: str) -> None:
         self.id: int = id
         self.name: str = name
+        self.exercise_type: str = exercise_type
         # bicep tricep legs -> Space sepearted muscle groups
-        self.muscle_grp_hit: str = muscle_grp_hit
+        self.muscles_targeted: str = muscles_targeted
         self.calories_10_min: float = calories_10_min
         self.fun_factor: int = fun_factor
         self.is_compound: bool = is_compound
         self.how_critical: int = how_critical
-        self.exercise_type: str = exercise_type
 
 # The entity which is stored in the csv file
 class Workout:

@@ -13,17 +13,21 @@ class ServiceLayer:
         self.recommender_layer = RecommenderLayer()
 
     '''
-    Save a workout given by the top user
+    New workout came in, save it
+    Also, do recomputation of the weights on the exercise and workout calc tables
     '''
     def save_workouts(self, todays_workout: Entities.Workout) -> bool:
         status_of_save: bool = self.dao_layer.save_workout(todays_workout)
         # A new workout was just in, need to run recomputations on exercise and workout calc file
-        status_of_recomputation = self.do_recomputation()
+        status_of_recomputation = self.do_recomputation(todays_workout)
         return status_of_save and status_of_recomputation
 
-    def do_recomputation(self):
+    '''
+    The recomputations
+    '''
+    def do_recomputation(self, todays_workout: Entities. Workout):
         # Do recomputations on exercise_calc
-        self.recommender_layer.recompute_exercises_weights()
+        self.recommender_layer.recompute_exercises_weights(todays_workout)
         # Do recomputations on workout_calc
         self.recommender_layer.recompute_workout_weights()
         return None
