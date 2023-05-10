@@ -25,9 +25,9 @@ class FrontEndService:
     def _prompt_user_and_get_todays_workout(self) -> Entities.Workout:
         now = datetime.now()
 
-        id = Utility.get_a_unique_id()
+        id = Utility.get_a_unique_id(now)
         exercise_list: str = input('Enter exercises of a list separated by space ')
-        date: str = Utility.get_todays_date_in_str()
+        date: str = Utility.get_todays_date_in_str(now)
         workout_fun_factor: int = int(input('Enter workout fun factor \t\t int \t\t 0 to 5, with 0 being least fun'))
         duration: float = float(input('Enter your duration of workout \t\t float'))
         calories_burnt: float = input('Enter calories burnt today \t\t float')
@@ -53,7 +53,7 @@ class FrontEndService:
         # Push to date - manipulate data only when safety is off
         if not self.safety:
             self.service_layer.save_workouts(todays_workout)
-            print("Saved the workouts")
+            print("Saved todays workouts")
         else:
             print("Not saving current workout in sheet")
         
