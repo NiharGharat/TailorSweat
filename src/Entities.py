@@ -8,13 +8,19 @@ class Exercise:
 
     def __init__(self, id: int, name: str, muscles_targeted: str, calories_10_min: float, fun_factor: int, is_compound: int, how_critical: int, exercise_type: str) -> None:
         self.id: int = id
+        # Name of the exercise
         self.name: str = name
+        # Core, ...
         self.exercise_type: str = exercise_type
         # bicep tricep legs -> Space sepearted muscle groups
         self.muscles_targeted: str = muscles_targeted
+        # A single number
         self.calories_10_min: float = calories_10_min
+        # User given 0 - 10
         self.fun_factor: int = fun_factor
+        # Number, 0: false, 1: true
         self.is_compound: int = is_compound
+        # Number 0 - 10
         self.how_critical: int = how_critical
 
 # The entity which is stored in the csv file
@@ -22,13 +28,19 @@ class Workout:
 
     def __init__(self, id: int, date: str, exercise_list: str, workout_fun_factor: int, duration: float, calories_burnt: float, mood: int, activeness: int, rpe_list: str) -> None:
         self.id: int = id
+        # str yyyyddmm
         self.date: str = date
         # bicep_curl tricep_extension
         self.exercise_list: str = exercise_list
+        # The overall workout fun factor 0 - 10
         self.workout_fun_factor: int = workout_fun_factor
+        # Overall duration of workout - float
         self.duration: float = duration
+        # Number
         self.calories_burnt: float = calories_burnt
+        # Mood 0, 1, 2 - Unhappy to Happy
         self.mood: int = mood
+        # Activeness: 0, 1, 2 - Unactive to veryActive
         self.activeness: int = activeness
         # 0 10 7 1 2
         # Same order in which user did the exercises
@@ -67,11 +79,7 @@ class Exercise_Derived:
         self.exercise_exhaustion_factor: int = exercise_exhaustion_factor
         self.missed_in_cycle_count: int = missed_in_cycle_count
 
-    # @staticmethod
-    # def convert_workouts_to_entity(todays_workout: List[str], workout_fun_factor: int, duration: float, calories_burnt: float, mood: int, activeness: int) -> Workout:
-    #     now = datetime.now()
-    #     # 20230509002049
-    #     now_id = int(now.strftime('%Y%m%d%H%M%S'))
-    #     now_date = now.strftime('%Y%m%d')
-    #     workout = Workout(now_id, now_date, todays_workout, workout_fun_factor, duration, calories_burnt, mood, activeness)
-    #     return workout
+class Workout_Derived:
+
+    def __init__(self) -> None:
+        

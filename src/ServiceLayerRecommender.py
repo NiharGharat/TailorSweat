@@ -12,7 +12,9 @@ class RecommenderLayer:
         Algo-
         1. Read the exercises table
         2. Read the workouts table
-        3. 
+        3. Read the exercise_derived table
+        4. Read the workout_derived table
+        5. 
         '''
 
     def recommend_next_workout(self) -> None:
