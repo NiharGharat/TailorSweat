@@ -25,8 +25,6 @@
 
 ## Datasets
 1. [Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data/code)
-3. [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit/code)
-10. [Fitness Trends Dataset](https://www.kaggle.com/datasets/aroojanwarkhan/fitness-data-trends)
 21. [Powerlifting Database](https://www.kaggle.com/datasets/open-powerlifting/powerlifting-database)
 
 

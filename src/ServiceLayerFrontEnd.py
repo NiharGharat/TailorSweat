@@ -1,3 +1,4 @@
+import datetime
 from typing import List
 from ServiceLayer import ServiceLayer
 '''
@@ -19,14 +20,34 @@ class FrontEndService:
     1. 
     '''
     def _prompt_user(self) -> List[str]:
-        input_string: str = input('Enter exercises of a list separated by space ')
+        now = datetime.now()
+
+        exercise_list: str = input('Enter exercises of a list separated by space ')
+        now_date: str = now.strftime('%Y%m%d')
+        fun_factor_workout: int = int(input('Enter workout fun factor \t\t int \t\t 0 to 5, with 0 being least fun'))
+        duration: float = float(input('Enter your duration of workout \t\t float'))
+        calories_burnt: float = input('Enter calories burnt today \t\t float')
+        mood: int = int(input('Enter your mood today \t\t int \t\t 0 being unhappy'))
+        activeness = int(input('Enter how active you feel \t\t int \t\t 0 being least active'))
         print("\n")
-        return input_string.split()
+        # Eg - bicep_curl tricep_extension leg_press
+        '''
+        self.date: str = date
+        # bicep_curl tricep_extension
+        self.exercise_list: str = exercise_list
+        self.workout_fun_factor: int = workout_fun_factor
+        self.duration: float = duration
+        self.calories_burnt: float = calories_burnt
+        self.mood: int = mood
+        self.activeness: int = activeness
+        '''
+
+        return exercise_list
     
-    def _main_procedure(self) -> List[str]:
+    def _main_procedure(self) -> str:
         # 1. Get todays workout
-        todays_workout: List[str] = self._prompt_user()
-        if len(todays_workout) == 0:
+        todays_workout: str = self._prompt_user()
+        if len(todays_workout.strip(" ")) == 0:
             print("No exercises detected")
             raise Exception("No workouts were entered")
         else:
@@ -41,7 +62,7 @@ class FrontEndService:
             print("Not saving current workout in sheet")
         
         # 3. Predict the next workout
-        next_workout: List[str] = self.service_layer.predict_next_workout()
+        next_workout: str = self.service_layer.predict_next_workout()
         return next_workout
     
     def main_procedure(self):

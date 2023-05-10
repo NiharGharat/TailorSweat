@@ -15,7 +15,7 @@ class ServiceLayer:
     '''
     Save a workout given by the top user
     '''
-    def save_workouts(self, todays_workout: List[str]):
+    def save_workouts(self, todays_workout: str):
         todays_workout: Entities.Workout = Entities.Workout.convert_workouts_to_entity(todays_workout)
         status_of_save: bool = self.dao_layer.save_workout(todays_workout)
         return status_of_save
