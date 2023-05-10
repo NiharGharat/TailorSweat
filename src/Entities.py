@@ -16,11 +16,11 @@ class Exercise:
         self.muscles_targeted: str = muscles_targeted
         # A single number
         self.calories_10_min: float = calories_10_min
-        # User given 0 - 10
+        # User given 0 - 5
         self.fun_factor: int = fun_factor
         # Number, 0: false, 1: true
         self.is_compound: int = is_compound
-        # Number 0 - 10
+        # Number 0 - 5
         self.how_critical: int = how_critical
 
 # The entity which is stored in the csv file
@@ -82,4 +82,4 @@ class Exercise_Derived:
 class Workout_Derived:
 
     def __init__(self) -> None:
-        
+        pass

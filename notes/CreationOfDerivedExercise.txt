@@ -1,0 +1,33 @@
+1. Entities.Exercise
+
+Class Name:
+Entities.Exercise_Derived
+
+Datafile Name:
+exercise.csv
+
+
+
+2. 
+Class Name:
+Entities.Exercise_Derived
+
+Gist:
+The exercise derived dataset gives the computed trainables variables which we will give to the neural network.
+
+Class Name: 
+
+Class Variables:
+1. id: int
+	- Gives the id of the derived exercise. This is the same as that used in exercise.csv
+2. name: str
+	- Same as exercise.csv
+3. exercise_importance: int
+	- Calculated as:
+
+4. exercise_cost: int
+5. exercise_recurrance_factor_per_cycle: int
+6. exercise_rpe: int
+7. exercise_overall_fun_factor: int
+8. exercise_exhaustion_factor: int
+9. missed_in_cycle_count: int
