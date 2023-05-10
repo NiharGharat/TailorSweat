@@ -19,15 +19,16 @@ class ServiceLayer:
     def save_workouts(self, todays_workout: Entities.Workout) -> bool:
         status_of_save: bool = self.dao_layer.save_workout(todays_workout)
         # A new workout was just in, need to run recomputations on exercise and workout calc file
-        status_of_recomputation = self.do_recomputation(todays_workout)
+        # todays_workout is not needed further as we have already 
+        status_of_recomputation = self.do_recomputation()
         return status_of_save and status_of_recomputation
 
     '''
     The recomputations
     '''
-    def do_recomputation(self, todays_workout: Entities. Workout):
+    def do_recomputation(self):
         # Do recomputations on exercise_calc
-        self.recommender_layer.recompute_exercises_weights(todays_workout)
+        self.recommender_layer.recompute_exercises_weights()
         # Do recomputations on workout_calc
         self.recommender_layer.recompute_workout_weights()
         return None
