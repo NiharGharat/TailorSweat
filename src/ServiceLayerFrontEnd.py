@@ -1,7 +1,6 @@
-import datetime
+from datetime import datetime
 from typing import List
 from ServiceLayer import ServiceLayer
-import Utility
 import Entities
 
 '''
