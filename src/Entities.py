@@ -91,7 +91,7 @@ class Workout_Derived:
 
 class User:
 
-    def __init__(self, id, name, gender, fitness_level, focused_muscle_group, age, goal) -> None:
+    def __init__(self, id, name, gender, fitness_level, focused_muscle_group, age, goal, weight) -> None:
         self.id: id = id
         self.name = name
         self.gender = gender
@@ -99,3 +99,4 @@ class User:
         self.focused_muscle_group = focused_muscle_group
         self.age = age
         self.goal = goal
+        self.weight = weight

@@ -2,6 +2,7 @@ from typing import List
 from ServiceLayerDao import DaoLayer
 from ServiceLayerRecommender import RecommenderLayer
 import Entities
+import Constants
 '''
 A class responsible for:
 1. 
@@ -28,14 +29,17 @@ class ServiceLayer:
     '''
     def do_recomputation(self):
         # Do recomputations on exercise_calc
-        self.recommender_layer.recompute_exercises_weights()
+        exercise_recomputed, workout_recomputed = self.recommender_layer.recompute_exercises_weights()
         # Do recomputations on workout_calc
+
+        user = self.dao_layer.read_table(Constants.TABLE_USER)
+        
+        # Wrangle the data
         self.recommender_layer.recompute_workout_weights()
         return None
 
     '''
     Predict next workout
     '''
-    def predict_next_workout(self):
-        # Predict/Train from the model
+    def predict_next_workout(self) -> str:
         return self.recommender_layer.recommend_next_workout()
