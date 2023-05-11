@@ -49,6 +49,7 @@ class RecommenderEngine:
         '''
         A wrapper for training if needed
         '''
+        predicted_labels = None
         if train.shape[0] % 21 == 0:
             model = self.handle_model_creation(train)
 
@@ -59,14 +60,14 @@ class RecommenderEngine:
         else:
             # No training happening if the data count is not above 21 rows.
             pass
-
+        
         return predicted_labels
 
-    def predict(self, exercise_data) -> str:
+    def predict(self, exercise_data, train, test) -> str:
         '''
         A wrapper for predicting if needed
         '''
-        probabilities = self.train()
+        probabilities = self.train(train, test)
 
         # Combine the two lists using zip()
         combined = list(zip(exercise_data, probabilities))
