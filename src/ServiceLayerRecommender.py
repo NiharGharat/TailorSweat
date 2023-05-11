@@ -134,21 +134,38 @@ class RecommenderLayer:
         '''
         
         # Rule 5: Increase the cost of exercises which have high calories burnt
+        # Not Working
+        # weight_penalty = -0.32
+        # # Top 10 burnout need to be penalised
+        # cals_burnout_limit = 10
+        # filter_ex = exercise_table.nlargest(cals_burnout_limit, 'calories_10_min')
+        # filter_ex.apply(lambda row: RecommenderLayer.penalty_burnout(exercise_dervied, row, weight_penalty), axis = 1)
 
         # Rule 6: If goal is strength, increase the cost of exercises which are cardio by little
         if user[user['name'] == Constants.USER_NAME]['goal'].item() == "strength":
             type_of_musc_to_penalise = "cardio"
             weight_cost = -0.25
             exercise_table.apply(lambda row: RecommenderLayer.increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost), axis = 1)
+        
         # Rule 7: If goal is cardio, increase the cost of exercises which are strength by little
+        if user[user['name'] == Constants.USER_NAME]['goal'].item() == "cardio":
+            type_of_musc_to_penalise = "strength"
+            weight_cost = -0.25
+            exercise_table.apply(lambda row: RecommenderLayer.increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost), axis = 1)
 
         # Rule 8: If exercise is compound, then boost its importance
+        weight_cost_for_compound = 0.35
+        exercise_table.apply(lambda row: RecommenderLayer.increase_compound(exercise_dervied, row, weight_cost_for_compound), axis = 1)
 
         # Rule 9: If exercise is critical, boost its importance
 
         # Rule 10: If fun factor < 2, but critical is less than 3, then increase the cost
 
+        # Rule 11: Recurrence factor
 
+        # Rule 12: Exercise rpe
+
+        # Rule 13: 
 
     def recompute_workout_weights(self):
         '''
@@ -175,23 +192,41 @@ class RecommenderLayer:
         predicted_workout = self.recommender_engine.predict(train)
         return predicted_workout
     
-    # ### KnowledgeBase
-    # @staticmethod
-    # def update_weights_muscle_group_matching(df_derived_ex, row, muscle_group, weightage):
-    #     # Update all rows who have bicep in muscle_targeted
-    #     if muscle_group in row['muscles_targeted'].split():
-    #         id = row['id']
-    #         old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
-    #         df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
-        
 
-    # @staticmethod
-    # def increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost):
-    #     if type_of_musc_to_penalise in row['muscles_targeted'].split():
-    #         id = row['id']
-    #         old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
-    #         df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_cost'] = old_val + weightage
+    #### KnowledgeBase
+    @staticmethod
+    def update_weights_muscle_group_matching(df_derived_ex, row, muscle_group, weightage):
+        # Update all rows who have bicep in muscle_targeted
+        if muscle_group in row['muscles_targeted'].split():
+            id = row['id']
+            old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
+            df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
 
+    @staticmethod
+    def increase_cost_of_type(exercise_dervied, row, type_of_exer_to_penalise, weight_cost):
+        if type_of_exer_to_penalise in row['exercise_type'].split():
+            # print("In")
+            id = row['id']
+            old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
+            # print(old_val)
+            exercise_dervied.loc[exercise_dervied['id'] == id, 'exercise_cost'] = old_val + weight_cost
+            # print(old_val + weight_cost)
+
+    @staticmethod
+    def increase_compound(exercise_dervied, row, weight_cost):
+        if str(row['is_compound']) != "0":
+            # Compound
+            id = row['id']
+            old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
+            exercise_dervied.loc[exercise_dervied['id'] == id, 'exercise_cost'] = old_val + weight_cost
+
+    @staticmethod
+    def penalty_burnout(exercise_dervied, row, weight_penalty):
+        id = row['id']
+        old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
+        print(old_val)
+        print(old_val + weight_penalty)
+        exercise_dervied.loc[exercise_dervied['id'] == id, 'exercise_cost'] = old_val + weight_penalty
 
 exercise_table = DaoLayer().read_table(Constants.TABLE_EXERCISE)
 workout_table = DaoLayer().read_table(Constants.TABLE_WORKOUT)
