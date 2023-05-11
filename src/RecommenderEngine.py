@@ -3,99 +3,79 @@ import tensorflow as tf
 from keras import models, layers, losses, regularizers
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from ast import literal_eval
 
 # Loading the dataset
-# data = pd.read_csv('src/resources/data/new_workout_conc.csv')
-# data = None
-# d = None
-# # d = pd.read_csv('src/resources/data/new_workout_onehot.csv')
-# numpy_array = data.values
-# numpy_array.shape
-# # loading the exercise reference data.
-# data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
-# # To keep a reference of the exercise names.
-# exercise_data = data_reference.iloc[:, 1].values
-# from sklearn.model_selection import train_test_split
+data = pd.read_csv('src/resources/data/new_workout_conc.csv')
 
-# # Assuming you have a NumPy array named 'data' for features and 'target' for the target variable
-# tran, test, y_train, y_test = train_test_split(data, d['excercise_list'].values, test_size=0.2, random_state=42)
-# print(tran.shape)
+d = pd.read_csv('src/resources/data/new_workout_onehot.csv')
+numpy_array = data.values
+numpy_array.shape
+# loading the exercise reference data.
+data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
+# To keep a reference of the exercise names.
+exercise_data = data_reference.iloc[:, 1].values
 
+# Assuming you have a NumPy array named 'data' for features and 'target' for the target variable
+X_train, X_test, y_train, y_test = train_test_split(data, d['excercise_list'].values, test_size=0.2, random_state=42)
+#X_train = np.reshape(X_train, (X_train.shape[0], 1, X_train.shape[1]))
+
+y_train = np.array([literal_eval(x) for x in y_train], dtype=float)
 
 class RecommenderEngine:
 
-    def __init__(self) -> None:
+    def __init__(self,) -> None:
         self.model = None
         pass
 
-    def handle_model_creation(self, train):
+    def handle_model_creation(self,X_train):
         '''
         Do model creation part
         Create the model, or load from the file
         ''' 
         model = models.Sequential()
-        # Adding the Conv2D layer to the model with fileters = 8, kernel size = (3, 3), strides = (1,1), padding='same', activation='relu' and a L2 Regularization of 0.0001.
-        model.add(layers.Conv2D(filters = 8, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', input_shape = (2868, 57,1), kernel_regularizer = regularizers.l2(0.0001)))
-        # Adding the Conv2D layer to the model with filters = 16, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu' and a L2 Regularization of 0.0001.
-        model.add(layers.Conv2D(filters = 16, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', kernel_regularizer = regularizers.l2(0.0001)))
-        # Adding the Max Pooling layer with a pool size of (2,2), strides = (2,2).
-        model.add(layers.MaxPooling2D(pool_size = (2,2), strides = (2,2)))
-        # Adding the Conv2D layer to the model with filters = 32, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu' and a L2 Regularization of 0.0001.
-        model.add(layers.Conv2D(filters = 32, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', kernel_regularizer = regularizers.l2(0.0001)))
-        # Adding the Conv2D layer to the model with filters = 64, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu' and a L2 Regularization of 0.0001.
-        model.add(layers.Conv2D(filters = 64, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', kernel_regularizer = regularizers.l2(0.0001)))
-        # Adding the Max Pooling layer with a pool size of (2,2), strides = (2,2).
-        model.add(layers.MaxPooling2D(pool_size = (2,2), strides = (2,2)))
-        # Adding a flatten layer to the model.
-        model.add(layers.Flatten())
-        # model.add(layers.InputLayer((57,)))
-        # Adding a dense layer to the model with units = 512, activation='relu' and L2 Regularization of 0.0001.
-        model.add(layers.Dense(units = 512, activation='relu', kernel_regularizer = regularizers.l2(0.0001)))
-        # Adding a dense layer to the model with units = 10, activation='linear' and L2 Regularization of 0.0001.
-        model.add(layers.Dense(units = 50, activation='linear', kernel_regularizer = regularizers.l2(0.0001)))
-        # Adding a softmax layer to the output layer.
-        model.add(layers.Activation('softmax'))     
-        # Compiling the Neural Network model with adam optimizer, loss = losses.categorical_crossentropy and metrics as 'accuracy'.
-        model.compile(optimizer = 'adam', loss = losses.categorical_crossentropy, metrics = ['accuracy'])
-        
+        model.add(layers.Dense(256, activation='relu', input_shape=(X_train.shape[1],)))
+        model.add(layers.BatchNormalization())
+        model.add(layers.Dropout(0.2))
+        model.add(layers.Dense(128, activation='relu'))
+        model.add(layers.BatchNormalization())
+        model.add(layers.Dropout(0.2))
+        model.add(layers.Dense(64, activation='relu'))
+        model.add(layers.BatchNormalization())
+        model.add(layers.Dropout(0.2))
+        model.add(layers.Dense(50, activation='sigmoid'))        
         return model
 
-    def train(self, tran, y_train):
+    def train(self, X_train, y_train,X_test):
+  
         '''
         A wrapper for training if needed
         '''
-        # predicted_labels = old_labels
-        predicted_labels = None
-        tran = np.reshape(tran, (3586, 57, 1))
-
-        # if train.shape[0] % 21 == 0:
-        model = self.handle_model_creation(tran)
-        history = model.fit(x = tran, y = y_train, epochs = 10, batch_size = 1, validation_split = 0.2)
+        model = self.handle_model_creation(X_train)
+        model.compile(loss=losses.mean_squared_error,optimizer='adam')
+        history = model.fit(x = X_train, y = y_train, epochs = 10, batch_size = 1, validation_split = 0.2)
         # Predict the probabilities for each class in the output layer
-        predictions = model.predict(test)
-        predicted_labels = np.argmax(predictions, axis=1)
-        print(predicted_labels)
+        predictions = model.predict(X_test)
+        return predictions
 
-        # else:
-            # No training happening if the data count is not above 21 rows.
-    
-
-        # Making the old labels to predicted_labels so that it can be used until the user makes 21 rows of data.
-        # old_labels = predicted_labels
-        return predicted_labels
-
-    def predict(self, exercise_data, tran, test) -> str:
+    def predict_routine(self, exercise_data, X_train,y_train, X_test) -> str:
         '''
         A wrapper for predicting if needed
+    
         '''
-        probabilities = self.train(tran, test)
-
+        exercise_names, exercise_counts = np.unique(exercise_data, return_counts=True)
+        exercise_dict = {name: count for name, count in zip(exercise_names, exercise_counts)}
+        probabilities = self.train(X_train,y_train, X_test)
+        #exercise_dict = {name: 0 for name in exercise_data}
+        exercise_probabilities = probabilities.flatten()
+    
         # Combining the probabilities and the exercise_names
-        exercise_prob = dict(zip(exercise_data, probabilities))
-
+        exercise_prob = dict(zip(exercise_dict, exercise_probabilities))
         # Sorting the the probabilities and returning the top 5
-        top_5 = sorted(exercise_prob, key = exercise_prob.get, reverse = True)[:5]
+        #top_5 = sorted(exercise_prob, key = exercise_prob.get, reverse = True)[:5]
+        top_5 = [exercise for exercise in sorted(exercise_prob, key=exercise_prob.get, reverse=True)
+             if exercise_prob[exercise] == 1][:5]
 
         return top_5
-# recommeder = RecommenderEngine()
-# recommeder.train(tran,y_train)
+recommeder = RecommenderEngine()
+print(recommeder.predict_routine(exercise_data,X_train,y_train,X_test))
