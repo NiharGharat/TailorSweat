@@ -2,11 +2,24 @@ import numpy as np
 import tensorflow as tf 
 from keras import models, layers, losses, regularizers
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
+# Loading the dataset
+data = pd.read_csv('src/resources/data/new_workout_conc.csv')
+
+d = pd.read_csv('src/resources/data/new_workout_onehot.csv')
+numpy_array = data.values
+numpy_array.shape
 # loading the exercise reference data.
 data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
 # To keep a reference of the exercise names.
 exercise_data = data_reference.iloc[:, 1].values
+from sklearn.model_selection import train_test_split
+
+# Assuming you have a NumPy array named 'data' for features and 'target' for the target variable
+tran, test, y_train, y_test = train_test_split(data, d['excercise_list'].values, test_size=0.2, random_state=42)
+print(tran.shape)
+
 
 class RecommenderEngine:
 
@@ -21,7 +34,7 @@ class RecommenderEngine:
         ''' 
         model = models.Sequential()
         # Adding the Conv2D layer to the model with fileters = 8, kernel size = (3, 3), strides = (1,1), padding='same', activation='relu' and a L2 Regularization of 0.0001.
-        model.add(layers.Conv2D(filters = 8, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', input_shape = train.shape[1:], kernel_regularizer = regularizers.l2(0.0001)))
+        model.add(layers.Conv2D(filters = 8, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', input_shape = (2868, 57,1), kernel_regularizer = regularizers.l2(0.0001)))
         # Adding the Conv2D layer to the model with filters = 16, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu' and a L2 Regularization of 0.0001.
         model.add(layers.Conv2D(filters = 16, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', kernel_regularizer = regularizers.l2(0.0001)))
         # Adding the Max Pooling layer with a pool size of (2,2), strides = (2,2).
@@ -34,6 +47,7 @@ class RecommenderEngine:
         model.add(layers.MaxPooling2D(pool_size = (2,2), strides = (2,2)))
         # Adding a flatten layer to the model.
         model.add(layers.Flatten())
+        # model.add(layers.InputLayer((57,)))
         # Adding a dense layer to the model with units = 512, activation='relu' and L2 Regularization of 0.0001.
         model.add(layers.Dense(units = 512, activation='relu', kernel_regularizer = regularizers.l2(0.0001)))
         # Adding a dense layer to the model with units = 10, activation='linear' and L2 Regularization of 0.0001.
@@ -45,37 +59,42 @@ class RecommenderEngine:
         
         return model
 
-    def train(self, train, test):
+    def train(self, tran, y_train):
         '''
         A wrapper for training if needed
         '''
+        # predicted_labels = old_labels
         predicted_labels = None
-        if train.shape[0] % 21 == 0:
-            model = self.handle_model_creation(train)
+        tran = np.reshape(tran, (3586, 57, 1))
 
-            history = model.fit(x = train, y = train, epochs = 10, batch_size = 1, validation_split = 0.2)
-            # Predict the probabilities for each class in the output layer
-            predictions = model.predict(test)
-            predicted_labels = np.argmax(predictions, axis=1)
-        else:
+        # if train.shape[0] % 21 == 0:
+        model = self.handle_model_creation(tran)
+        history = model.fit(x = tran, y = y_train, epochs = 10, batch_size = 1, validation_split = 0.2)
+        # Predict the probabilities for each class in the output layer
+        predictions = model.predict(test)
+        predicted_labels = np.argmax(predictions, axis=1)
+        print(predicted_labels)
+
+        # else:
             # No training happening if the data count is not above 21 rows.
-            pass
-        
+    
+
+        # Making the old labels to predicted_labels so that it can be used until the user makes 21 rows of data.
+        # old_labels = predicted_labels
         return predicted_labels
 
-    def predict(self, exercise_data, train, test) -> str:
+    def predict(self, exercise_data, tran, test) -> str:
         '''
         A wrapper for predicting if needed
         '''
-        probabilities = self.train(train, test)
+        probabilities = self.train(tran, test)
 
-        # Combine the two lists using zip()
-        combined = list(zip(exercise_data, probabilities))
+        # Combining the probabilities and the exercise_names
+        exercise_prob = dict(zip(exercise_data, probabilities))
 
-        # Sort the combined list based on the exersise probabilites (in descending order)
-        sorted_combined = sorted(combined, key=lambda x: x[1], reverse=True)
-
-        # Get the top 5 exercise recommendataions
-        top_5 = sorted_combined[:5]
+        # Sorting the the probabilities and returning the top 5
+        top_5 = sorted(exercise_prob, key = exercise_prob.get, reverse = True)[:5]
 
         return top_5
+recommeder = RecommenderEngine()
+recommeder.train(tran,y_train)
