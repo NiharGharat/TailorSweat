@@ -3,7 +3,11 @@ import tensorflow as tf
 from keras import models, layers, losses, regularizers
 import pandas as pd
 
-data_reference = pd.read_csv("\src\resources\data\exercise.csv")
+# loading the exercise reference data.
+data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
+# To keep a reference of the exercise names.
+exercise_data = data_reference.iloc[:, 1].values
+
 class RecommenderEngine:
 
     def __init__(self) -> None:
@@ -52,11 +56,25 @@ class RecommenderEngine:
             # Predict the probabilities for each class in the output layer
             predictions = model.predict(test)
             predicted_labels = np.argmax(predictions, axis=1)
+        else:
+            # No training happening if the data count is not above 21 rows.
+            pass
 
         return predicted_labels
 
-    def predict(self) -> str:
+    def predict(self, exercise_data) -> str:
         '''
         A wrapper for predicting if needed
         '''
-        pass
+        probabilities = self.train()
+
+        # Combine the two lists using zip()
+        combined = list(zip(exercise_data, probabilities))
+
+        # Sort the combined list based on the exersise probabilites (in descending order)
+        sorted_combined = sorted(combined, key=lambda x: x[1], reverse=True)
+
+        # Get the top 5 exercise recommendataions
+        top_5 = sorted_combined[:5]
+
+        return top_5
