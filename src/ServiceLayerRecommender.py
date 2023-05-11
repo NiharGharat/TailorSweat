@@ -163,7 +163,7 @@ class RecommenderLayer:
 
         # Rule 11: Recurrence factor
         # Calc the count of exercises 
-        exercise_table.apply(lambda row: RecommenderLayer.recurrance_factor_calculator(exercise_dervied, row), axis = 1)
+        # exercise_table.apply(lambda row: RecommenderLayer.recurrance_factor_calculator(exercise_dervied, row), axis = 1)
 
         # Rule 12: Exercise rpe
 
