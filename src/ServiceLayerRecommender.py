@@ -15,12 +15,12 @@ class RecommenderLayer:
         self.recommender_engine = RecommenderEngine()
         self.model = Utility.load_model(Constants.MODEL_PATH)
 
-    def data_preprocessing(self, data, exercise_directory):
+    def data_preprocessing(self, data, exercise_table):
         '''
         Function to preprocess the data for training.
         '''
         # Making a reference dictionary of the exercises.
-        reference = dict(zip(exercise_directory['name'], exercise_directory['id']))
+        reference = dict(zip(exercise_table['name'], exercise_table['id']))
         # Converting the Exercise list column of training data into list of exercises.
         data['excercise_list'] = data['excercise_list'].apply(lambda x: x.split())
 
@@ -36,7 +36,7 @@ class RecommenderLayer:
         # Applying the index of exercises
         data['excercise_list'] = data.apply(lambda row: update_exercise_list(row, reference),axis = 1)
 
-        # Function to convert the list of exercise into their respective indexes according to exercise_directory
+        # Function to convert the list of exercise into their respective indexes according to exercise_table
         def exercises_to_index_col(row, dic):
             Exercise_list = row['excercise_list']
             zero_list = [0] * 50
@@ -59,7 +59,9 @@ class RecommenderLayer:
 
         return new_data
 
-    def wrangle_data(self, exercise_derived, workout_dervied, user, exercise_metadata):
+
+    def wrangle_data(self, exercise_derived, workout_dervied, user, exercise_metadata, workout_table):
+
         pass
 
     def recompute_exercises_weights(self):
@@ -173,18 +175,26 @@ class RecommenderLayer:
         predicted_workout = self.recommender_engine.predict(train)
         return predicted_workout
     
-    #### KnowledgeBase
-    @staticmethod
-    def update_weights_muscle_group_matching(df_derived_ex, row, muscle_group, weightage):
-        # Update all rows who have bicep in muscle_targeted
-        if muscle_group in row['muscles_targeted'].split():
-            id = row['id']
-            old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
-            df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
+    # ### KnowledgeBase
+    # @staticmethod
+    # def update_weights_muscle_group_matching(df_derived_ex, row, muscle_group, weightage):
+    #     # Update all rows who have bicep in muscle_targeted
+    #     if muscle_group in row['muscles_targeted'].split():
+    #         id = row['id']
+    #         old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
+    #         df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
+        
 
-    @staticmethod
-    def increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost):
-        if type_of_musc_to_penalise in row['muscles_targeted'].split():
-            id = row['id']
-            old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
-            df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_cost'] = old_val + weightage
+    # @staticmethod
+    # def increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost):
+    #     if type_of_musc_to_penalise in row['muscles_targeted'].split():
+    #         id = row['id']
+    #         old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
+    #         df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_cost'] = old_val + weightage
+
+
+exercise_table = DaoLayer().read_table(Constants.TABLE_EXERCISE)
+workout_table = DaoLayer().read_table(Constants.TABLE_WORKOUT)
+c = RecommenderLayer()
+train_data = c.data_preprocessing(workout_table, exercise_table)
+print(train_data)
