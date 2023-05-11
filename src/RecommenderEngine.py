@@ -1,27 +1,20 @@
 import numpy as np
 import tensorflow as tf 
-import matplotlib.pyplot as plt
 from keras import models, layers, losses, regularizers
+import pandas as pd
 
+data_reference = pd.read_csv("\src\resources\data\exercise.csv")
 class RecommenderEngine:
 
     def __init__(self) -> None:
         self.model = None
         pass
 
-    def handle_model_creation(self):
+    def handle_model_creation(self, train):
         '''
         Do model creation part
         Create the model, or load from the file
         ''' 
-        pass
-
-    def train(self, train, test):
-        '''
-        A wrapper for training if needed
-        '''
-        # Model Architecture
-        # Creating the Sequential object
         model = models.Sequential()
         # Adding the Conv2D layer to the model with fileters = 8, kernel size = (3, 3), strides = (1,1), padding='same', activation='relu' and a L2 Regularization of 0.0001.
         model.add(layers.Conv2D(filters = 8, kernel_size = (3,3), strides = (1,1), padding='same', activation='relu', input_shape = train.shape[1:], kernel_regularizer = regularizers.l2(0.0001)))
@@ -45,16 +38,22 @@ class RecommenderEngine:
         model.add(layers.Activation('softmax'))     
         # Compiling the Neural Network model with adam optimizer, loss = losses.categorical_crossentropy and metrics as 'accuracy'.
         model.compile(optimizer = 'adam', loss = losses.categorical_crossentropy, metrics = ['accuracy'])
+        
+        return model
 
-        # Training the model with a validation split of 0.2 and storing the model in the history object.
-        history = model.fit(x = train, y = train, epochs = 10, batch_size = 1, validation_split = 0.2)
-        # Predict the probabilities for each class in the output layer
-        predictions = model.predict(test)
+    def train(self, train, test):
+        '''
+        A wrapper for training if needed
+        '''
+        if train.shape[0] % 21 == 0:
+            model = self.handle_model_creation(train)
 
-        predicted_labels = np.argmax(predictions, axis=1)
+            history = model.fit(x = train, y = train, epochs = 10, batch_size = 1, validation_split = 0.2)
+            # Predict the probabilities for each class in the output layer
+            predictions = model.predict(test)
+            predicted_labels = np.argmax(predictions, axis=1)
 
-
-        return predictions_labels
+        return predicted_labels
 
     def predict(self) -> str:
         '''
