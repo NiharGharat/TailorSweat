@@ -77,4 +77,6 @@ class RecommenderEngine:
 
         return top_5
 recommeder = RecommenderEngine()
+print("\n\nThe predicted workouts were\n\n")
 print(recommeder.predict_routine(exercise_data,X_train,y_train,X_test))
+print("\n\n")
