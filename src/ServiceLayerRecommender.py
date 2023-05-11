@@ -1,13 +1,16 @@
 import Constants
 import Utility
 import Entities
-import ServiceLayer
+from RecommenderEngine import RecommenderEngine
+from ServiceLayerDao import DaoLayer
+
 
 class RecommenderLayer:
 
     def __init__(self) -> None:
         self.model = None
-        self.service_layer = ServiceLayer()
+        self.dao_layer = DaoLayer()
+        self.recommender_engine = RecommenderEngine()
         self.model = Utility.load_model(Constants.MODEL_PATH)
 
     def recompute_exercises_weights(self, todays_workout: Entities.Workout):
@@ -34,12 +37,21 @@ class RecommenderLayer:
     def recommend_next_workout(self) -> str:
         predicted_workout: str = ""
         # 1. Pull params from dao layers from exercise_derived_table, workout_derived, user table
+        exercise_dervied = self.dao_layer.read_table(Constants.TABLE_EXERCISE_DERIVED)
+        workout_dervied = self.dao_layer.read_table(Constants.TABLE_WORKOUT_DERIVED)
+        user = self.dao_layer.read_table(Constants.TABLE_USER)
+        exercise_metadata = self.dao_layer.read_talle(Constants.TABLE_EXERCISE)
 
-        # 2. Wrangle params with necessary 
+        # 2. Wrangle params with necessary
+        # Create the data as we want as train, test
+        train, test = self.wrangle_data(exercise_dervied, workout_dervied, user, exercise_metadata)
 
         # 3. Create network if not created
-        # Do model part
-        # Create the model, or load from the file
+        self.recommender_engine.handle_model_creation()
+
+        # 4. Train if needed
+        self.recommender_engine.train(train, test)
 
         # 4. Predict using the model
+        predicted_workout = self.recommender_engine.predict()
         return predicted_workout

@@ -29,12 +29,8 @@ class ServiceLayer:
     '''
     def do_recomputation(self):
         # Do recomputations on exercise_calc
-        exercise_recomputed, workout_recomputed = self.recommender_layer.recompute_exercises_weights()
+        self.recommender_layer.recompute_exercises_weights()
         # Do recomputations on workout_calc
-
-        user = self.dao_layer.read_table(Constants.TABLE_USER)
-        
-        # Wrangle the data
         self.recommender_layer.recompute_workout_weights()
         return None
 
