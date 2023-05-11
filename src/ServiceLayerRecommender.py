@@ -3,6 +3,8 @@ import Utility
 import Entities
 from RecommenderEngine import RecommenderEngine
 from ServiceLayerDao import DaoLayer
+import pandas as pd
+import numpy as np
 
 
 class RecommenderLayer:
@@ -12,6 +14,53 @@ class RecommenderLayer:
         self.dao_layer = DaoLayer()
         self.recommender_engine = RecommenderEngine()
         self.model = Utility.load_model(Constants.MODEL_PATH)
+
+    def data_preprocessing(self, data, exercise_directory):
+        '''
+        Function to preprocess the data for training.
+        '''
+        # Making a reference dictionary of the exercises.
+        reference = dict(zip(exercise_directory['name'], exercise_directory['id']))
+        # Converting the Exercise list column of training data into list of exercises.
+        data['excercise_list'] = data['excercise_list'].apply(lambda x: x.split())
+
+        # Function to convert the list of exercises to their index values from the reference table.
+        def update_exercise_list(row, dic):
+            Exercise_list = row['excercise_list']
+            e_per_day = []
+            for exercise in Exercise_list:
+                if exercise in dic:
+                    e_per_day.append(dic[exercise])
+            return e_per_day
+
+        # Applying the index of exercises
+        data['excercise_list'] = data.apply(lambda row: update_exercise_list(row, reference),axis = 1)
+
+        # Function to convert the list of exercise into their respective indexes according to exercise_directory
+        def exercises_to_index_col(row, dic):
+            Exercise_list = row['excercise_list']
+            zero_list = [0] * 50
+            for index in Exercise_list:
+                zero_list[index-1] = 1
+            return zero_list
+
+        # Applying exercises_to_index_col
+        data['excercise_list'] = data.apply(lambda row: exercises_to_index_col(row, reference), axis = 1)
+
+        # Converting Exercise list object to array.
+        excercise_array = np.array(data['excercise_list'].tolist())
+
+        # Converting array to dataframe
+        df = pd.DataFrame(excercise_array)
+
+        # Concatenating back to data.
+        new_data = pd.concat([data, df], axis=1)
+        new_data.drop('excercise_list',inplace = True, axis = 1)
+
+        return new_data
+
+    def wrangle_data(self, exercise_derived, workout_dervied, user, exercise_metadata):
+        pass
 
     def recompute_exercises_weights(self):
         # Here, we need to recompute the weights from the exercise data(in exercise_recomp)
