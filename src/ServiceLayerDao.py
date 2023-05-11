@@ -29,5 +29,4 @@ class DaoLayer:
                 workout.mood,
                 workout.activeness
             ])
-
         return True
