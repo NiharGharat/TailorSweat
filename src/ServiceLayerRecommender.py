@@ -13,7 +13,7 @@ class RecommenderLayer:
         self.recommender_engine = RecommenderEngine()
         self.model = Utility.load_model(Constants.MODEL_PATH)
 
-    def recompute_exercises_weights(self, todays_workout: Entities.Workout):
+    def recompute_exercises_weights(self):
         # Here, we need to recompute the weights from the exercise data(in exercise_recomp)
 
         '''
