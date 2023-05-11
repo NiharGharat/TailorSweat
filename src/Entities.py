@@ -81,5 +81,21 @@ class Exercise_Derived:
 
 class Workout_Derived:
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, suggested_wo_completion_percentage, wo_imp, wo_cost, wo_muscles_targetted, wo_rpe, wo_overall_cals) -> None:
+        self.suggested_wo_completion_percentage: float = suggested_wo_completion_percentage
+        self.wo_imp: int = wo_imp
+        self.wo_cost: int = wo_cost
+        self.wo_muscles_targetted: str = wo_muscles_targetted
+        self.wo_rpe: int = wo_rpe
+        self.wo_overall_cals: float = wo_overall_cals
+
+class User:
+
+    def __init__(self, id, name, gender, fitness_level, focused_muscle_group, age, goal) -> None:
+        self.id: id = id
+        self.name = name
+        self.gender = gender
+        self.fitness_level = fitness_level
+        self.focused_muscle_group = focused_muscle_group
+        self.age = age
+        self.goal = goal

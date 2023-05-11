@@ -14,7 +14,9 @@ class RecommenderLayer:
         2. Read the workouts table
         3. Read the exercise_derived table
         4. Read the workout_derived table
-        5. 
+        5. Read the user table
+        6. Compute the 
+
         '''
 
     def recommend_next_workout(self) -> None:
