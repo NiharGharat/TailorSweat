@@ -42,27 +42,60 @@ class RecommenderLayer:
 
     def knowledge_base_exercise(self, exercise_table, workout_table, exercise_dervied, user, exercise_metadata):
         # If exercise_derived table has NaN in these columns, replace them with 0
-        # Columns - "exercise_importance	exercise_cost	exercise_recurrance_factor_per_cycle	exercise_rpe	exercise_overall_fun_factor	exercise_exhaustion_factor	missed_in_cycle_count"
+        # Validation: Working
         columns_to_replace_nan_to_zero = ["exercise_importance", "exercise_cost", "exercise_recurrance_factor_per_cycle", "exercise_rpe", "exercise_overall_fun_factor", "exercise_exhaustion_factor", "missed_in_cycle_count"]
+        for i in columns_to_replace_nan_to_zero:
+            exercise_dervied[i].fillna(0, inplace=True)
 
-
-        # Rule 1: If "bicep" in exercise[muscles_targeted] and user has "bicep" in user[focused_muscle_group]
-        # then increase old_val + 0.37
-        muscle_group = "bicep"
-        weight = 0.37
-        exercise_table.apply(lambda row: RecommenderLayer.update_weights_muscle_group_matching(user, exercise_dervied, row, Constants.USER_NAME, muscle_group, weight), axis = 1)
-        
-        # Rule 1:
+        # Rule 1: Working
         '''
         Make bigger muscles stronger first
         '''
         mapping = {"bicep":0.25, "chest": 0.55, "core": 0.20, "leg": 0.55, "back": 0.55, "shoulder": 0.45, "tricep": 0.25}
         for key, value in mapping.items():
-            exercise_table.apply(lambda row: RecommenderLayer.update_weights_muscle_group_matching(user, exercise_dervied, row, Constants.USER_NAME, key, value), axis = 1)
+            exercise_table.apply(lambda row: RecommenderLayer.update_weights_muscle_group_matching(exercise_dervied, row, key, value), axis = 1)
         
-        
+        # Rule 2: Working
+        '''
+        If Age in bracket 18 - 30 -> Improve asthetic muscles -> bicep and tricep and shoulder
+        '''
+        age_lower = 18
+        age_higher = 40
+        age_user = int(user[user['name'] == Constants.USER_NAME]['age'].item())
+        if age_lower <= age_user and age_user <= age_higher:
+            weight_to_improve = 0.55
+            mapping = {"bicep":0.25, "core": 0.25, "shoulder": 0.25, "tricep": 0.25}
+            for key, value in mapping.items():
+                exercise_table.apply(lambda row: RecommenderLayer.update_weights_muscle_group_matching(exercise_dervied, row, key, value), axis = 1)
 
-        # Rule 2: If 
+        # Rule 3: Working
+        '''
+        Boost muscle group which the user is focusing
+        '''
+        muscle_group_which_user_is_focusing = user[user['name'] == Constants.USER_NAME]['focused_muscle_group'].item().split()
+        for i in muscle_group_which_user_is_focusing:
+            weight_to_improve = 0.55
+            exercise_table.apply(lambda row: RecommenderLayer.update_weights_muscle_group_matching(exercise_dervied, row, i, weight_to_improve), axis = 1)
+
+        # Rule 4:
+        '''
+        Boost the exercises which have more fun factor
+        '''
+        
+        # Rule 5: Increase the cost of exercises which have high calories burnt
+
+        # Rule 6: If goal is strength, increase the cost of exercises which are cardio by little
+        if user[user['name'] == Constants.USER_NAME]['goal'].item() == "strength":
+            type_of_musc_to_penalise = "cardio"
+            weight_cost = -0.25
+            exercise_table.apply(lambda row: RecommenderLayer.increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost), axis = 1)
+        # Rule 7: If goal is cardio, increase the cost of exercises which are strength by little
+
+        # Rule 8: If exercise is compound, then boost its importance
+
+        # Rule 9: If exercise is critical, boost its importance
+
+        # Rule 10: If fun factor < 2, but critical is less than 3, then increase the cost
 
 
 
@@ -93,10 +126,16 @@ class RecommenderLayer:
     
     #### KnowledgeBase
     @staticmethod
-    def update_weights_muscle_group_matching(df_user, df_derived_ex, row, user_name, muscle_group, weightage):
-        if muscle_group in df_user[df_user['name'] == user_name]['focused_muscle_group'].item().split():
-            # Update all rows who have bicep in muscle_targeted
-            if muscle_group in row['muscles_targeted'].split():
-                id = row['id']
-                old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
-                df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
+    def update_weights_muscle_group_matching(df_derived_ex, row, muscle_group, weightage):
+        # Update all rows who have bicep in muscle_targeted
+        if muscle_group in row['muscles_targeted'].split():
+            id = row['id']
+            old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
+            df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
+
+    @staticmethod
+    def increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost):
+        if type_of_musc_to_penalise in row['muscles_targeted'].split():
+            id = row['id']
+            old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
+            df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_cost'] = old_val + weightage

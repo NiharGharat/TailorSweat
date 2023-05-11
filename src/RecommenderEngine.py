@@ -5,20 +5,21 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # Loading the dataset
-data = pd.read_csv('src/resources/data/new_workout_conc.csv')
+# data = pd.read_csv('src/resources/data/new_workout_conc.csv')
+# data = None
+# d = None
+# # d = pd.read_csv('src/resources/data/new_workout_onehot.csv')
+# numpy_array = data.values
+# numpy_array.shape
+# # loading the exercise reference data.
+# data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
+# # To keep a reference of the exercise names.
+# exercise_data = data_reference.iloc[:, 1].values
+# from sklearn.model_selection import train_test_split
 
-d = pd.read_csv('src/resources/data/new_workout_onehot.csv')
-numpy_array = data.values
-numpy_array.shape
-# loading the exercise reference data.
-data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
-# To keep a reference of the exercise names.
-exercise_data = data_reference.iloc[:, 1].values
-from sklearn.model_selection import train_test_split
-
-# Assuming you have a NumPy array named 'data' for features and 'target' for the target variable
-tran, test, y_train, y_test = train_test_split(data, d['excercise_list'].values, test_size=0.2, random_state=42)
-print(tran.shape)
+# # Assuming you have a NumPy array named 'data' for features and 'target' for the target variable
+# tran, test, y_train, y_test = train_test_split(data, d['excercise_list'].values, test_size=0.2, random_state=42)
+# print(tran.shape)
 
 
 class RecommenderEngine:
@@ -96,5 +97,5 @@ class RecommenderEngine:
         top_5 = sorted(exercise_prob, key = exercise_prob.get, reverse = True)[:5]
 
         return top_5
-recommeder = RecommenderEngine()
-recommeder.train(tran,y_train)
+# recommeder = RecommenderEngine()
+# recommeder.train(tran,y_train)

@@ -47,7 +47,7 @@ class Workout:
         self.rpe_list: str = rpe_list
 
     @staticmethod
-    def prompt_to_create_workout(now) -> Entities.Workout:
+    def prompt_to_create_workout(now):
         id = Utility.get_a_unique_id(now)
         # Eg - bicep_curl tricep_extension leg_press
         exercise_list: str = input('Enter exercises of a list separated by space ')
