@@ -1,6 +1,5 @@
 import numpy as np
-import tensorflow as tf 
-from keras import models, layers, losses, regularizers
+from keras import models, layers, losses
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from ast import literal_eval
