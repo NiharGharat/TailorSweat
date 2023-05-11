@@ -5,13 +5,13 @@ from sklearn.model_selection import train_test_split
 from ast import literal_eval
 
 # Loading the dataset
-data = pd.read_csv('src/resources/data/new_workout_conc.csv')
+data = pd.read_csv('resources/data/new_workout_conc.csv')
 
-d = pd.read_csv('src/resources/data/new_workout_onehot.csv')
+d = pd.read_csv('resources/data/new_workout_onehot.csv')
 numpy_array = data.values
 numpy_array.shape
 # loading the exercise reference data.
-data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
+data_reference = pd.read_csv("resources/data/exercise_raw.csv", index_col=False)
 # To keep a reference of the exercise names.
 exercise_data = data_reference.iloc[:, 1].values
 
