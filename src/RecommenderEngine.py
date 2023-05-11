@@ -2,11 +2,16 @@ import numpy as np
 import tensorflow as tf 
 from keras import models, layers, losses, regularizers
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
+# Loading the dataset
+data = pd.read_csv('src/resources/data/workout.csv')
+print(data.head(5))
 # loading the exercise reference data.
 data_reference = pd.read_csv("src/resources/data/exercise_raw.csv", index_col=False)
 # To keep a reference of the exercise names.
 exercise_data = data_reference.iloc[:, 1].values
+
 
 class RecommenderEngine:
 
@@ -45,14 +50,14 @@ class RecommenderEngine:
         
         return model
 
-    def train(self, train, test):
+    def train(self, train, test, old_labels):
         '''
         A wrapper for training if needed
         '''
-        predicted_labels = None
+        predicted_labels = old_labels
+
         if train.shape[0] % 21 == 0:
             model = self.handle_model_creation(train)
-
             history = model.fit(x = train, y = train, epochs = 10, batch_size = 1, validation_split = 0.2)
             # Predict the probabilities for each class in the output layer
             predictions = model.predict(test)
@@ -60,7 +65,10 @@ class RecommenderEngine:
         else:
             # No training happening if the data count is not above 21 rows.
             pass
-        
+
+        # Making the old labels to predicted_labels so that it can be used until the user makes 21 rows of data.
+        old_labels = predicted_labels
+
         return predicted_labels
 
     def predict(self, exercise_data, train, test) -> str:
@@ -69,13 +77,10 @@ class RecommenderEngine:
         '''
         probabilities = self.train(train, test)
 
-        # Combine the two lists using zip()
-        combined = list(zip(exercise_data, probabilities))
+        # Combining the probabilities and the exercise_names
+        exercise_prob = dict(zip(exercise_data, probabilities))
 
-        # Sort the combined list based on the exersise probabilites (in descending order)
-        sorted_combined = sorted(combined, key=lambda x: x[1], reverse=True)
-
-        # Get the top 5 exercise recommendataions
-        top_5 = sorted_combined[:5]
+        # Sorting the the probabilities and returning the top 5
+        top_5 = sorted(exercise_prob, key = exercise_prob.get, reverse = True)[:5]
 
         return top_5
