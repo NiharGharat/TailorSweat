@@ -29,10 +29,10 @@ class ServiceLayer:
     '''
     def do_recomputation(self):
         # Do recomputations on exercise_calc
-        self.recommender_layer.recompute_exercises_weights()
+        status = self.recommender_layer.recompute_exercises_weights()
         # Do recomputations on workout_calc
-        self.recommender_layer.recompute_workout_weights()
-        return None
+        status2 = self.recommender_layer.recompute_workout_weights()
+        return status and status2
 
     '''
     Predict next workout

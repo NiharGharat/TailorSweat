@@ -11,3 +11,6 @@ TABLE_EXERCISE_METADATA = "exercise_metadata.csv"
 TABLE_USER = "user.csv"
 TABLE_WORKOUT_DERIVED = "workout_derived.csv"
 TABLE_EXERCISE_DERIVED = "exercise_derived.csv"
+
+# User
+USER_NAME = "Mike"

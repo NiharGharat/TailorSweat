@@ -102,7 +102,7 @@ class User:
         self.focused_muscle_group = focused_muscle_group
         # age in int
         self.age = age
-        # bulking, strength, wt_decrease, etc.
+        # bulking, strength, wt_loss.
         self.goal = goal
         # Wt
         self.weight = weight
