@@ -8,8 +8,9 @@
 # Assumptions
 1. Legs are not split in quads, calves, hamstrings, etc. - rather its just legs
 
-# Running the code
+# Instructions
 1. Run the CodeRunner.ipynb
+2. ProjectReport is in notes folder.
 
 # Libraries
 1. As given in requirements.txt
