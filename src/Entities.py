@@ -94,9 +94,15 @@ class User:
     def __init__(self, id, name, gender, fitness_level, focused_muscle_group, age, goal, weight) -> None:
         self.id: id = id
         self.name = name
+        # 0, 1
         self.gender = gender
+        # 0, 1, 2
         self.fitness_level = fitness_level
+        # 0, 1, 2, -> from exercise_metadata
         self.focused_muscle_group = focused_muscle_group
+        # age in int
         self.age = age
+        # bulking, strength, wt_decrease, etc.
         self.goal = goal
+        # Wt
         self.weight = weight
