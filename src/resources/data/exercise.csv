@@ -49,3 +49,4 @@ id,name,exercise_type,muscles_targeted,calories_10_min,fun_factor,is_compound,ho
 48,wall_balls,strength,core leg,90.0,4,1,4
 49,elliptical,cardio,back bicep chest leg shoulder tricep core,100.0,3,0,4
 50,box_jumps,cardio,core leg,100.0,4,1,4
+0,No Exercise,None,None,0,0,0,0
