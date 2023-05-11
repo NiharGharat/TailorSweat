@@ -3,6 +3,8 @@ import Utility
 import Entities
 from RecommenderEngine import RecommenderEngine
 from ServiceLayerDao import DaoLayer
+import pandas as pd
+import numpy as np
 
 
 class RecommenderLayer:
@@ -12,6 +14,55 @@ class RecommenderLayer:
         self.dao_layer = DaoLayer()
         self.recommender_engine = RecommenderEngine()
         self.model = Utility.load_model(Constants.MODEL_PATH)
+
+    def data_preprocessing(self, data, exercise_table):
+        '''
+        Function to preprocess the data for training.
+        '''
+        # Making a reference dictionary of the exercises.
+        reference = dict(zip(exercise_table['name'], exercise_table['id']))
+        # Converting the Exercise list column of training data into list of exercises.
+        data['excercise_list'] = data['excercise_list'].apply(lambda x: x.split())
+
+        # Function to convert the list of exercises to their index values from the reference table.
+        def update_exercise_list(row, dic):
+            Exercise_list = row['excercise_list']
+            e_per_day = []
+            for exercise in Exercise_list:
+                if exercise in dic:
+                    e_per_day.append(dic[exercise])
+            return e_per_day
+
+        # Applying the index of exercises
+        data['excercise_list'] = data.apply(lambda row: update_exercise_list(row, reference),axis = 1)
+
+        # Function to convert the list of exercise into their respective indexes according to exercise_table
+        def exercises_to_index_col(row, dic):
+            Exercise_list = row['excercise_list']
+            zero_list = [0] * 50
+            for index in Exercise_list:
+                zero_list[index-1] = 1
+            return zero_list
+
+        # Applying exercises_to_index_col
+        data['excercise_list'] = data.apply(lambda row: exercises_to_index_col(row, reference), axis = 1)
+
+        # Converting Exercise list object to array.
+        excercise_array = np.array(data['excercise_list'].tolist())
+
+        # Converting array to dataframe
+        df = pd.DataFrame(excercise_array)
+
+        # Concatenating back to data.
+        new_data = pd.concat([data, df], axis=1)
+        new_data.drop('excercise_list',inplace = True, axis = 1)
+
+        return new_data
+
+
+    def wrangle_data(self, exercise_derived, workout_dervied, user, exercise_metadata, workout_table):
+
+        pass
 
     def recompute_exercises_weights(self):
         # Here, we need to recompute the weights from the exercise data(in exercise_recomp)
@@ -124,18 +175,26 @@ class RecommenderLayer:
         predicted_workout = self.recommender_engine.predict(train)
         return predicted_workout
     
-    #### KnowledgeBase
-    @staticmethod
-    def update_weights_muscle_group_matching(df_derived_ex, row, muscle_group, weightage):
-        # Update all rows who have bicep in muscle_targeted
-        if muscle_group in row['muscles_targeted'].split():
-            id = row['id']
-            old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
-            df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
+    # ### KnowledgeBase
+    # @staticmethod
+    # def update_weights_muscle_group_matching(df_derived_ex, row, muscle_group, weightage):
+    #     # Update all rows who have bicep in muscle_targeted
+    #     if muscle_group in row['muscles_targeted'].split():
+    #         id = row['id']
+    #         old_val = df_derived_ex[df_derived_ex['id'] == id]['exercise_importance'].item()
+    #         df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_importance'] = old_val + weightage
+        
 
-    @staticmethod
-    def increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost):
-        if type_of_musc_to_penalise in row['muscles_targeted'].split():
-            id = row['id']
-            old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
-            df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_cost'] = old_val + weightage
+    # @staticmethod
+    # def increase_cost_of_type(exercise_dervied, row, type_of_musc_to_penalise, weight_cost):
+    #     if type_of_musc_to_penalise in row['muscles_targeted'].split():
+    #         id = row['id']
+    #         old_val = exercise_dervied[exercise_dervied['id'] == id]['exercise_cost'].item()
+    #         df_derived_ex.loc[df_derived_ex['id'] == id, 'exercise_cost'] = old_val + weightage
+
+
+exercise_table = DaoLayer().read_table(Constants.TABLE_EXERCISE)
+workout_table = DaoLayer().read_table(Constants.TABLE_WORKOUT)
+c = RecommenderLayer()
+train_data = c.data_preprocessing(workout_table, exercise_table)
+print(train_data)

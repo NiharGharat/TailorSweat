@@ -8,7 +8,7 @@ class DaoLayer:
     def __init__(self) -> None:
         pass
 
-    def read_table(table_name: str):
+    def read_table(self, table_name: str):
         return pd.read_csv(table_name, header=0)
 
     def save_workout(self, todays_workout: Workout):
