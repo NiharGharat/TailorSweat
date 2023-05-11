@@ -162,6 +162,8 @@ class RecommenderLayer:
         # Rule 10: If fun factor < 2, but critical is less than 3, then increase the cost
 
         # Rule 11: Recurrence factor
+        # Calc the count of exercises 
+        exercise_table.apply(lambda row: RecommenderLayer.recurrance_factor_calculator(exercise_dervied, row), axis = 1)
 
         # Rule 12: Exercise rpe
 
@@ -177,10 +179,9 @@ class RecommenderLayer:
         predicted_workout: str = ""
         # 1. Pull params from dao layers from exercise_derived_table, workout_derived, user table
         
-
         # 2. Wrangle params with necessary
         # Create the data as we want as train, test
-        train, test = self.wrangle_data(exercise_dervied, workout_dervied, user, exercise_metadata)
+        train, test = self.wrangle_data(exercise_dervied, workout_dervied)
 
         # 3. Create network if not created
         self.recommender_engine.handle_model_creation()

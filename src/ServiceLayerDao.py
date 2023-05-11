@@ -24,8 +24,8 @@ class DaoLayer:
             # Write the workout data as a row in the CSV file
             writer.writerow([
                 workout.id,
-                workout.date.isoformat(),
-                ','.join(workout.exercise_list),
+                workout.date,
+                workout.exercise_list,
                 workout.workout_fun_factor,
                 workout.duration,
                 workout.calories_burnt,
