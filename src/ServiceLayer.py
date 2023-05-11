@@ -2,6 +2,7 @@ from typing import List
 from ServiceLayerDao import DaoLayer
 from ServiceLayerRecommender import RecommenderLayer
 import Entities
+import Constants
 '''
 A class responsible for:
 1. 
@@ -36,6 +37,5 @@ class ServiceLayer:
     '''
     Predict next workout
     '''
-    def predict_next_workout(self):
-        # Predict/Train from the model
+    def predict_next_workout(self) -> str:
         return self.recommender_layer.recommend_next_workout()
