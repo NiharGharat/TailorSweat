@@ -1,51 +1,52 @@
-id,name,exercise_type,muscles_targeted,calories_10_min,fun_factor,is_compound,how_critical,Unnamed: 8
-1,bicep_curl,strength,bicep,40,4,0,2,
-2,burpee,cardio,chest core leg,110,2,1,4,
-3,deadlift,strength,back leg,85.0,3,1,5,
-4,squat,strength,leg,65.0,4,1,5,
-5,bench_press,strength,chest shoulder tricep,65.0,4,1,5,
-6,push_up,strength,chest core shoulder tricep,80.0,3,1,5,
-7,pull_up,strength,back bicep,65.0,2,1,5,
-8,lat_pulldown,strength,back bicep,50.0,3,1,3,
-9,leg_press,strength,leg,65.0,2,1,4,
-10,leg_extension,strength,leg,40.0,3,0,3,
-11,leg_curl,strength,leg,40.0,3,0,3,
-12,lunge,strength,leg,75.0,4,1,4,
-13,dumbbell_row,strength,back bicep,50.0,3,1,3,
-14,dumbbell_fly,strength,chest,40.0,2,0,2,
-15,tricep_extension,strength,tricep,40.0,2,0,2,
-16,shoulder_press,strength,shoulder,50.0,3,1,3,
-17,crunches,strength,core,40.0,3,0,3,
-18,plank,strength,core,40.0,3,0,3,
-19,russian_twist,strength,core,40.0,3,0,3,
-20,plank,strength,core,25.0,2,0,3,
-21,superman,strength,back leg,40.0,3,0,2,
-22,bird_dog,strength,back core,40.0,2,0,2,
-23,squat_jump,cardio,leg,100,3,1,4,
-24,jumping_jacks,cardio,back bicep chest leg shoulder tricep core,90.0,4,0,2,
-25,high_knees,cardio,core leg,90.0,3,0,2,
-26,jump_rope,cardio,back bicep chest leg shoulder tricep core,100,4,0,3,
-27,mountain_climbers,cardio,core leg,90.0,4,1,3,
-28,running,cardio,leg,125.0,4,0,5,
-29,cycling,cardio,leg,100.0,4,0,5,
-30,swimming,cardio,back bicep chest leg shoulder tricep core,120,5,0,5,
-31,yoga,stretching,back bicep chest leg shoulder tricep core,40.0,4,0,4,
-32,pilates,stretching,back bicep chest leg shoulder tricep core core,40.0,4,0,4,
-33,tai_chi,stretching,back bicep chest leg shoulder tricep core,25.0,3,0,3,
-34,foam_rolling,stretching,back bicep chest leg shoulder tricep core,25.0,2,0,3,
-35,stair_climbing,endurance,core leg,125.0,3,1,4,
-36,rowing_machine,endurance,back bicep tricep leg,100.0,4,1,4,
-37,battle_ropes,endurance,bicep tricep core shoulder,100.0,4,1,4,
-38,box_jumps,endurance,leg,125.0,3,1,4,
-39,farmers_walk,strongman,bicep shoulder,40.0,2,1,3,
-40,tire_flips,strongman,core leg,125.0,4,1,5,
-41,kettlebell_swing,strongman,leg,125.0,4,1,5,
-42,bulgarian_split_squat,strength,leg,50.0,3,0,4,
-43,lateral_lunges,strength,leg,50.0,3,0,3,
-44,push_press,strength,bicep tricep shoulder,50.0,3,1,3,
-45,tricep_dips,strength,chest tricep,40.0,2,0,2,
-46,side_plank,strength,core,25.0,2,0,2,
-47,medicine_ball_slam,strength,back bicep chest leg shoulder tricep core,90.0,4,1,4,
-48,wall_balls,strength,core leg,90.0,4,1,4,
-49,elliptical,cardio,back bicep chest leg shoulder tricep core,100.0,3,0,4,
-50,box_jumps,cardio,core leg,100.0,4,1,4,
+id,name,exercise_type,muscles_targeted,calories_10_min,fun_factor,is_compound,how_critical
+1,bicep_curl,strength,bicep,40,4,0,2
+2,burpee,cardio,chest core leg,110,2,1,4
+3,deadlift,strength,back leg,85.0,3,1,5
+4,squat,strength,leg,65.0,4,1,5
+5,bench_press,strength,chest shoulder tricep,65.0,4,1,5
+6,push_up,strength,chest core shoulder tricep,80.0,3,1,5
+7,pull_up,strength,back bicep,65.0,2,1,5
+8,lat_pulldown,strength,back bicep,50.0,3,1,3
+9,leg_press,strength,leg,65.0,2,1,4
+10,leg_extension,strength,leg,40.0,3,0,3
+11,leg_curl,strength,leg,40.0,3,0,3
+12,lunge,strength,leg,75.0,4,1,4
+13,dumbbell_row,strength,back bicep,50.0,3,1,3
+14,dumbbell_fly,strength,chest,40.0,2,0,2
+15,tricep_extension,strength,tricep,40.0,2,0,2
+16,shoulder_press,strength,shoulder,50.0,3,1,3
+17,crunches,strength,core,40.0,3,0,3
+18,plank,strength,core,40.0,3,0,3
+19,russian_twist,strength,core,40.0,3,0,3
+20,plank,strength,core,25.0,2,0,3
+21,superman,strength,back leg,40.0,3,0,2
+22,bird_dog,strength,back core,40.0,2,0,2
+23,squat_jump,cardio,leg,100,3,1,4
+24,jumping_jacks,cardio,back bicep chest leg shoulder tricep core,90.0,4,0,2
+25,high_knees,cardio,core leg,90.0,3,0,2
+26,jump_rope,cardio,back bicep chest leg shoulder tricep core,100,4,0,3
+27,mountain_climbers,cardio,core leg,90.0,4,1,3
+28,running,cardio,leg,125.0,4,0,5
+29,cycling,cardio,leg,100.0,4,0,5
+30,swimming,cardio,back bicep chest leg shoulder tricep core,120,5,0,5
+31,yoga,stretching,back bicep chest leg shoulder tricep core,40.0,4,0,4
+32,pilates,stretching,back bicep chest leg shoulder tricep core core,40.0,4,0,4
+33,tai_chi,stretching,back bicep chest leg shoulder tricep core,25.0,3,0,3
+34,foam_rolling,stretching,back bicep chest leg shoulder tricep core,25.0,2,0,3
+35,stair_climbing,endurance,core leg,125.0,3,1,4
+36,rowing_machine,endurance,back bicep tricep leg,100.0,4,1,4
+37,battle_ropes,endurance,bicep tricep core shoulder,100.0,4,1,4
+38,box_jumps,endurance,leg,125.0,3,1,4
+39,farmers_walk,strongman,bicep shoulder,40.0,2,1,3
+40,tire_flips,strongman,core leg,125.0,4,1,5
+41,kettlebell_swing,strongman,leg,125.0,4,1,5
+42,bulgarian_split_squat,strength,leg,50.0,3,0,4
+43,lateral_lunges,strength,leg,50.0,3,0,3
+44,push_press,strength,bicep tricep shoulder,50.0,3,1,3
+45,tricep_dips,strength,chest tricep,40.0,2,0,2
+46,side_plank,strength,core,25.0,2,0,2
+47,medicine_ball_slam,strength,back bicep chest leg shoulder tricep core,90.0,4,1,4
+48,wall_balls,strength,core leg,90.0,4,1,4
+49,elliptical,cardio,back bicep chest leg shoulder tricep core,100.0,3,0,4
+50,box_jumps,cardio,core leg,100.0,4,1,4
+0,No Exercise,None,None,0,0,0,0
